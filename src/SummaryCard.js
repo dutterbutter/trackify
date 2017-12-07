@@ -1,21 +1,47 @@
 import React from 'react';
+import axios from 'axios';
 
 class Summary extends React.Component {
     constructor() {
         super()
         this.state = {
-            summary: {}
+            summary: []
         }
     }
 
+    componentWillMount() {
+        axios.get('http://localhost:8080/summary')
+            .then(result => {
+                this.setState({
+                    summary: result.data
+                })
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+
     render() {
+               
+        let coinMkt = this.state.summary;
+        console.log(coinMkt);
+
+        let names;
+        Object.keys(coinMkt).forEach(key => {
+            names = coinMkt[key].map((el, i) => {
+               return (el.name)
+            })
+            // console.log(coinMkt[key][0].name);   // the value of the current key.
+        });
+
         return (
             <div className= "container">
 
                 <ul className="collection z-depth-2">
                     <li className="collection-item">
                  
-                        <div className="left-align sumCard">BitCoin</div>
+                        <div className="left-align sumCard">{names}</div>
                         <div className="price">$17,565 CAD </div>
                         <br/>
                         <div className="left-align mkt">BITTREX: BTC - 4:02 PM EST</div>
