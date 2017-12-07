@@ -1,0 +1,94 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.nav-wrapper{
+  background-color: #ffffff;
+}
+
+.title{
+  color: black;
+}
+.menu{
+  color: #65737e;
+}
+
+.input-field{
+  border-radius: 10px; 
+}
+
+.input-field input[type=search] {
+  margin-bottom: 4px;
+  border-bottom: none;
+}
+
+.tab{
+  font-family: 'Roboto', sans-serif;
+}
+.crypto{
+  padding-top:7px;
+  font-family: 'Lato', sans-serif;
+}
+
+.sumCard{
+  text-align: left;
+  font-weight: bold;
+  float:left;
+  font-family: 'Lato', sans-serif;
+}
+
+.material-icons {
+  vertical-align: -6px; /*Change this to adjust the icon*/
+}
+
+.secondary-content{
+  float:right;
+  text-align:right; 
+  font-family: 'Lato', sans-serif;
+}
+
+.price{
+  float:right;
+  text-align:right; 
+  font-family: 'Lato', sans-serif;
+}
+
+
+.mkt{
+  float:left;
+  color: #a7adba;
+  font-family: 'Lato', sans-serif;
+}
+
+.collection .collection-item{
+  padding-bottom: 25px;
+}
+
+.collection{
+ border-radius: 10px;  
+}
