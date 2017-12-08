@@ -17,8 +17,7 @@ app.get('/summary', (req, res) => {
     return axios.get(url)
 
     .then(response => {
-        result.coinMkt = response.data;
-        console.log(result.coinMkt);
+        result = response.data;
         res.send(result);
     })
     .catch(err => {

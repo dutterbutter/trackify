@@ -71,13 +71,25 @@
   text-align:right; 
   font-family: 'Lato', sans-serif;
 }
+.positive{
+  float:right;
+  text-align:right; 
+  font-family: 'Lato', sans-serif;
+  color: #4cb54a;
+}
+
+.negative{
+  float:right;
+  text-align:right; 
+  font-family: 'Lato', sans-serif;
+  color: #e04a60;
+}
 
 .price{
   float:right;
   text-align:right; 
   font-family: 'Lato', sans-serif;
 }
-
 
 .mkt{
   float:left;

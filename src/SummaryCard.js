@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+
 class Summary extends React.Component {
     constructor() {
         super()
@@ -12,8 +13,13 @@ class Summary extends React.Component {
     componentWillMount() {
         axios.get('http://localhost:8080/summary')
             .then(result => {
+
+                let newData = Object.assign({}, this.state)
+                let arrData = Array.from(result.data);
+                let concatData = arrData.concat(newData);
+
                 this.setState({
-                    summary: result.data
+                    summary: concatData
                 })
             })
             .catch(error => {
@@ -21,62 +27,55 @@ class Summary extends React.Component {
             })
     }
 
-
     render() {
-               
         let coinMkt = this.state.summary;
         console.log(coinMkt);
+        let collectionsCrypto = coinMkt.map((el, i) => {
 
-        let names;
-        Object.keys(coinMkt).forEach(key => {
-            names = coinMkt[key].map((el, i) => {
-               return (el.name)
-            })
-            // console.log(coinMkt[key][0].name);   // the value of the current key.
-        });
+            let d = new Date(el.last_updated * 1000),	// Convert the passed timestamp to milliseconds
+                yyyy = d.getFullYear(),
+                mm = ('0' + (d.getMonth() + 1)).slice(-2),	// Months are zero based. Add leading 0.
+                dd = ('0' + d.getDate()).slice(-2),			// Add leading 0.
+                hh = d.getHours(),
+                h = hh,
+                min = ('0' + d.getMinutes()).slice(-2),		// Add leading 0.
+                ampm = 'AM',
+                time;
+
+            if (hh > 12) {
+                h = hh - 12;
+                ampm = 'PM';
+            } else if (hh === 12) {
+                h = 12;
+                ampm = 'PM';
+            } else if (hh == 0) {
+                h = 12;
+            }
+
+            // ie: 2013-02-18, 8:35 AM	
+            time = yyyy + '-' + mm + '-' + dd + ', ' + h + ':' + min + ' ' + ampm;
+
+
+            let prices = parseFloat(el.price_usd);
+
+            if (i <= 4) {
+                return <li key={i} className="collection-item">
+
+                    <div className="left-align sumCard">{el.name}</div>
+                    <div className="price">${prices.toFixed(2)} USD </div>
+                    <br />
+                    <div className="left-align mkt">{el.symbol} - {time}</div>
+                    <div className={el.percent_change_24h.includes('-') ? 'negative' : 'positive'}>{el.percent_change_24h}%<i className="material-icons">{el.percent_change_24h.includes('-') ? 'trending_down' : 'trending_up'}</i></div>
+
+                </li>
+            }
+        })
 
         return (
-            <div className= "container">
-
+            <div className="container">
                 <ul className="collection z-depth-2">
-                    <li className="collection-item">
-                 
-                        <div className="left-align sumCard">{names}</div>
-                        <div className="price">$17,565 CAD </div>
-                        <br/>
-                        <div className="left-align mkt">BITTREX: BTC - 4:02 PM EST</div>
-                        <div className="secondary-content">31%<i className="material-icons">trending_up</i></div>
-                    
-                    </li>
-                    <li className="collection-item">
-
-                        <div className="left-align sumCard">Ethereum</div>
-                        <div className="price">$545 CAD </div>
-                        <br/>
-                        <div className="left-align mkt">BITTREX: ETC - 4:02 PM EST</div>
-                        <div className="secondary-content">15%<i className="material-icons">trending_up</i></div>
-
-                    </li>
-                    <li className="collection-item">
-
-                        <div className="left-align sumCard">Monero</div>
-                        <div className="price">$268.24 CAD</div>
-                        <br/>
-                        <div className="left-align mkt">BITTREX: XMR - 4:02 PM EST</div>
-                        <div className="secondary-content">6%<i className="material-icons">trending_up</i></div>
-
-                    </li>
-                    <li className="collection-item">
-
-                        <div className="left-align sumCard">Ripple</div>
-                        <div className="price">$.234 CAD </div>
-                        <br/>
-                        <div className="left-align mkt">BITTREX: XRP - 4:02 PM EST</div>
-                        <div className="secondary-content">2%<i className="material-icons">trending_up</i></div>
-                
-                    </li>
+                    {collectionsCrypto}
                 </ul>
-
             </div>
         )
     }
