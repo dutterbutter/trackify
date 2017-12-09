@@ -1,5 +1,6 @@
 import React from 'react';
 import Summary from './SummaryCard';
+import Coins from './YourCoins';
 
 class TabComp extends React.Component {
     render() {
@@ -12,7 +13,7 @@ class TabComp extends React.Component {
                     <li className="tab col s3"><a href="#test-swipe-3">Markets</a></li>
                 </ul>
                 <div id="test-swipe-1" className="col s12"><Summary /></div>
-                <div id="test-swipe-2" className="col s12">Your Coins</div>
+                <div id="test-swipe-2" className="col s12"><Coins /></div>
                 <div id="test-swipe-3" className="col s12">Markets</div>
             </div>
         );

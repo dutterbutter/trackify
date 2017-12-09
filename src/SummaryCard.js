@@ -48,7 +48,7 @@ class Summary extends React.Component {
             } else if (hh === 12) {
                 h = 12;
                 ampm = 'PM';
-            } else if (hh == 0) {
+            } else if (hh === 0) {
                 h = 12;
             }
 
@@ -65,7 +65,11 @@ class Summary extends React.Component {
                     <div className="price">${prices.toFixed(2)} USD </div>
                     <br />
                     <div className="left-align mkt">{el.symbol} - {time}</div>
-                    <div className={el.percent_change_24h.includes('-') ? 'negative' : 'positive'}>{el.percent_change_24h}%<i className="material-icons">{el.percent_change_24h.includes('-') ? 'trending_down' : 'trending_up'}</i></div>
+                    <div className={el.percent_change_24h.includes('-') ? 'negative' : 'positive'}>
+                    {el.percent_change_24h}%
+                    <i className="material-icons">
+                    {el.percent_change_24h.includes('-') ? 'trending_down' : 'trending_up'}
+                    </i></div>
 
                 </li>
             }
