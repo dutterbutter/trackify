@@ -100,7 +100,13 @@
 .collection .collection-item{
   padding-bottom: 25px;
 }
-
+.collection-item .coin {
+  padding-bottom: 10px !important;
+}
 .collection{
  border-radius: 10px;  
+}
+
+.follow{
+  color: blue;
 }

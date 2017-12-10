@@ -1,15 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import Coin from './Coin';
 
-class Summary extends React.Component {
+
+class Coin extends React.Component {
     constructor() {
         super()
         this.state = {
-            summary: [],
-            coins: []
+            coin: []
         }
-        
     }
 
     componentWillMount() {
@@ -21,7 +19,7 @@ class Summary extends React.Component {
                 let concatData = arrData.concat(newData);
 
                 this.setState({
-                    summary: concatData
+                    coin: concatData
                 })
             })
             .catch(error => {
@@ -29,28 +27,9 @@ class Summary extends React.Component {
             })
     }
 
-    addItemHandler(id) {
-        console.log(id);
-        axios.get(`http://localhost:8080/summary/${id}`)
-        .then(result => {
-        
-            let arrCoin = Array.from(result.data);
-            console.log('arrCoin ',arrCoin);
-
-            this.setState({
-                coins: arrCoin
-            })
-            console.log(this.state.coins)
-        })
-        .catch(error => {
-            console.log(error);
-        })
-      }
-
-
     render() {
-        let coinMkt = this.state.summary;
-    
+        let coinMkt = this.state.coin;
+        
         let collectionsCrypto = coinMkt.map((el, i) => {
 
             let d = new Date(el.last_updated * 1000),	// Convert the passed timestamp to milliseconds
@@ -79,8 +58,8 @@ class Summary extends React.Component {
 
             let prices = parseFloat(el.price_usd);
 
-            if (i <= 4) {
-                return <li key={i} className="collection-item">
+            if (i <= 9) {
+                return <li key={i} className="collection-item coins">
 
                     <div className="left-align sumCard">{el.name}</div>
                     <div className="price">${prices.toFixed(2)} USD </div>
@@ -91,7 +70,14 @@ class Summary extends React.Component {
                     <i className="material-icons">
                     {el.percent_change_24h.includes('-') ? 'trending_down' : 'trending_up'}
                     </i></div>
-
+                    <br />
+                    <div className="left-align follow" onClick= {(event) => {
+                        event.preventDefault()
+                        this.props.addItemHandler(el.id);
+                    }}> 
+                    <i className="material-icons">add</i>
+                    FOLLOW
+                    </div>
                 </li>
             }
         })
@@ -101,9 +87,8 @@ class Summary extends React.Component {
                 <ul className="collection z-depth-2">
                     {collectionsCrypto}
                 </ul>
-                <Coin addItemHandler={this.addItemHandler.bind(this)}/>
             </div>
         )
     }
 }
-export default Summary;
+export default Coin;
