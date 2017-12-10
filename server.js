@@ -28,7 +28,6 @@ app.get('/summary', (req, res) => {
 app.get('/summary/:id', (req, res) => {
     
         let id = req.params.id;
-        console.log(id);
         let result = {}
         let urlBase = 'https://api.coinmarketcap.com/v1/ticker/'+id
         
@@ -36,7 +35,6 @@ app.get('/summary/:id', (req, res) => {
     
         .then(response => {
             result = response.data;
-            console.log(result);
             res.send(result);
         })
         .catch(err => {

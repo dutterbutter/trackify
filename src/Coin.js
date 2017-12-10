@@ -8,24 +8,37 @@ class Coin extends React.Component {
         this.state = {
             coin: []
         }
+        this.addItemHandler = this.addItemHandler.bind(this)
     }
 
     componentWillMount() {
         axios.get('http://localhost:8080/summary')
             .then(result => {
-
-                let newData = Object.assign({}, this.state)
                 let arrData = Array.from(result.data);
-                let concatData = arrData.concat(newData);
 
                 this.setState({
-                    coin: concatData
+                    coin: arrData
                 })
             })
             .catch(error => {
                 console.log(error);
             })
     }
+
+    addItemHandler(id) {
+                console.log(id);
+                axios.get(`http://localhost:8080/summary/${id}`)
+                    .then(result => {
+                        let arrCoin = Array.from(result.data);
+                        this.setState({
+                            coins: arrCoin
+                        })
+                        console.log(this.state.coins)
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
 
     render() {
         let coinMkt = this.state.coin;
@@ -73,7 +86,7 @@ class Coin extends React.Component {
                     <br />
                     <div className="left-align follow" onClick= {(event) => {
                         event.preventDefault()
-                        this.props.addItemHandler(el.id);
+                        this.addItemHandler(el.id);
                     }}> 
                     <i className="material-icons">add</i>
                     FOLLOW

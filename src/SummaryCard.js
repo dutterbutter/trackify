@@ -9,19 +9,15 @@ class Summary extends React.Component {
             summary: [],
             coins: []
         }
-        
+
     }
 
     componentWillMount() {
         axios.get('http://localhost:8080/summary')
             .then(result => {
-
-                let newData = Object.assign({}, this.state)
                 let arrData = Array.from(result.data);
-                let concatData = arrData.concat(newData);
-
                 this.setState({
-                    summary: concatData
+                    summary: arrData
                 })
             })
             .catch(error => {
@@ -29,28 +25,8 @@ class Summary extends React.Component {
             })
     }
 
-    addItemHandler(id) {
-        console.log(id);
-        axios.get(`http://localhost:8080/summary/${id}`)
-        .then(result => {
-        
-            let arrCoin = Array.from(result.data);
-            console.log('arrCoin ',arrCoin);
-
-            this.setState({
-                coins: arrCoin
-            })
-            console.log(this.state.coins)
-        })
-        .catch(error => {
-            console.log(error);
-        })
-      }
-
-
     render() {
         let coinMkt = this.state.summary;
-    
         let collectionsCrypto = coinMkt.map((el, i) => {
 
             let d = new Date(el.last_updated * 1000),	// Convert the passed timestamp to milliseconds
@@ -72,10 +48,8 @@ class Summary extends React.Component {
             } else if (hh === 0) {
                 h = 12;
             }
-
             // ie: 2013-02-18, 8:35 AM	
             time = yyyy + '-' + mm + '-' + dd + ', ' + h + ':' + min + ' ' + ampm;
-
 
             let prices = parseFloat(el.price_usd);
 
@@ -87,11 +61,10 @@ class Summary extends React.Component {
                     <br />
                     <div className="left-align mkt">{el.symbol} - {time}</div>
                     <div className={el.percent_change_24h.includes('-') ? 'negative' : 'positive'}>
-                    {el.percent_change_24h}%
+                        {el.percent_change_24h}%
                     <i className="material-icons">
-                    {el.percent_change_24h.includes('-') ? 'trending_down' : 'trending_up'}
-                    </i></div>
-
+                            {el.percent_change_24h.includes('-') ? 'trending_down' : 'trending_up'}
+                        </i></div>
                 </li>
             }
         })
@@ -101,7 +74,6 @@ class Summary extends React.Component {
                 <ul className="collection z-depth-2">
                     {collectionsCrypto}
                 </ul>
-                <Coin addItemHandler={this.addItemHandler.bind(this)}/>
             </div>
         )
     }
