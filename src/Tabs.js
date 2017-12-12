@@ -17,11 +17,13 @@ class TabComp extends React.Component {
        
         axios.get(`http://localhost:8080/summary/${id}`)
             .then(result => {
-                let arrCoin = Array.from(result.data);
-               
 
+                let testCoins = Array.from(this.state.coins);
+                let arrCoin = Array.from(result.data);
+                let coinsTest = arrCoin.concat(testCoins);
+                
                 this.setState({
-                    coins: arrCoin
+                    coins: coinsTest
                 })
             })
             .catch(error => {
