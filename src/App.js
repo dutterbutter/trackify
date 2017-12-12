@@ -72,7 +72,8 @@ class App extends Component {
       <div className="App">
         <Sticky />
         <div className="container">
-          <Search />
+          <Search
+            longSummary = {this.state.summary} />
         </div>
         <TabComp
           summary={this.state.summary}

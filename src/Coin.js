@@ -1,6 +1,4 @@
 import React from 'react';
-import axios from 'axios';
-
 
 class Coin extends React.Component {
 

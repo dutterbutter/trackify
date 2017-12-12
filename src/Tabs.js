@@ -1,8 +1,6 @@
 import React from 'react';
 import Summary from './SummaryCard';
 import Coin from './Coin';
-import axios from 'axios';
-
 
 class TabComp extends React.Component {
 
