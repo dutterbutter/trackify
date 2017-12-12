@@ -2,31 +2,10 @@ import React from 'react';
 import axios from 'axios';
 
 class Summary extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            summary: [],
-            added: []
-        }
-    }
-
-    componentWillMount() {
-        axios.get('http://localhost:8080/summary')
-            .then(result => {
-                let arrData = Array.from(result.data);
-                this.setState({
-                    summary: arrData
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }
 
     render() {
-        let coinMkt = this.state.summary;
-        let follow = this.props.coinFollow
-       
+        let coinMkt = this.props.summary;
+        let follow = this.props.coinAdded
 
         let collectionsCrypto = coinMkt.map((el, i) => {
             let d = new Date(el.last_updated * 1000),	// Convert the passed timestamp to milliseconds
@@ -66,6 +45,9 @@ class Summary extends React.Component {
                 </li>
             }
         })
+
+        
+        
         let addedCoin = follow.map((el, i) => {
             let d = new Date(el.last_updated * 1000),	// Convert the passed timestamp to milliseconds
                 yyyy = d.getFullYear(),

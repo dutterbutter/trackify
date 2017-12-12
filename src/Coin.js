@@ -3,51 +3,9 @@ import axios from 'axios';
 
 
 class Coin extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            coin: [],
-            status: []
-        }
-    }
-
-    componentWillMount() {
-        axios.get('http://localhost:8080/summary')
-            .then(result => {
-                let arrData = Array.from(result.data);
-
-                this.setState({
-                    coin: arrData
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }
-
-    toggle(id) {
-        console.log(id);
-
-        let copy = Array.from(this.state.status);
-        if (!copy.includes(id)) {
-            copy.push(id)
-            this.setState({
-                status: copy
-            })
-        } else {
-            let copyArr = copy.indexOf(id)
-            if (copyArr > -1) {
-                copy.splice(copyArr, 1);
-            }
-            this.setState({
-                status: copy
-            })
-        }
-
-    }
 
     render() {
-        let coinMkt = this.state.coin;
+        let coinMkt = this.props.summary;
 
         let collectionsCrypto = coinMkt.map((el, i) => {
 
@@ -92,12 +50,11 @@ class Coin extends React.Component {
                     <br />
                     <div className="left-align follow" onClick={(event) => {
                         event.preventDefault()
-                        this.toggle(el.id)
                         this.props.addItemHandler(el.id);
                     }}
                     >
-                        <i className="material-icons">{this.state.status.includes(el.id) ? 'check' : 'add'}</i>
-                        {this.state.status.includes(el.id) ? 'FOLLOWING' : 'FOLLOW'}
+                        <i className="material-icons">{this.props.status.includes(el.id) ? 'check' : 'add'}</i>
+                        {this.props.status.includes(el.id) ? 'FOLLOWING' : 'FOLLOW'}
                     </div>
                 </li>
             }

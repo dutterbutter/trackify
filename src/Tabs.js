@@ -5,32 +5,6 @@ import axios from 'axios';
 
 
 class TabComp extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-           coins: []
-        }
-        this.addItemHandler = this.addItemHandler.bind(this)
-    }
-
-    addItemHandler(id) {
-       
-        axios.get(`http://localhost:8080/summary/${id}`)
-            .then(result => {
-
-                let testCoins = Array.from(this.state.coins);
-                let arrCoin = Array.from(result.data);
-                let coinsTest = arrCoin.concat(testCoins);
-                
-                this.setState({
-                    coins: coinsTest
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }
-
 
     render() {
 
@@ -42,8 +16,18 @@ class TabComp extends React.Component {
                     <li className="tab col s3"><a href="#test-swipe-2">Your Coins</a></li>
                     <li className="tab col s3"><a href="#test-swipe-3">Markets</a></li>
                 </ul>
-                <div id="test-swipe-1" className="col s12"><Summary coinFollow = {this.state.coins} /></div>
-                <div id="test-swipe-2" className="col s12"><Coin addItemHandler={this.addItemHandler} /></div>
+                <div id="test-swipe-1" className="col s12">
+                <Summary 
+                    coinAdded = {this.props.coinAdded}
+                    summary= {this.props.summary} />
+                </div>
+                <div id="test-swipe-2" className="col s12">
+                <Coin 
+                    summary={this.props.summary}
+                    addItemHandler={this.props.addItemHandler}
+                    toggle= {this.props.toggle}
+                    status= {this.props.status} />
+                </div>
                 <div id="test-swipe-3" className="col s12">Markets</div>
             </div>
         );
