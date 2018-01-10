@@ -16,8 +16,9 @@ class Search extends React.Component {
     }
 
     displayMatches() {
-        let summary = this.props.longSummary;
+        let summary = this.props.summary;
         console.log('it ran?')
+       
         const matchArray = this.findMatches(this.value, summary);
         const html = matchArray.map(coin => {
             const regex = new RegExp(this.value, 'gi');
@@ -29,7 +30,8 @@ class Search extends React.Component {
           </li>
           `;
         }).join("");
-        this.refs.suggestions = html;
+        // this.refs.suggestions = html;
+
     }
 
     // const searchInput = document.querySelector('.search');
@@ -49,7 +51,8 @@ class Search extends React.Component {
                             this.displayMatches()
                         }}/>
                         <i className="material-icons">search</i>
-                        <ul className="suggestions" ref="suggestions">
+                        <ul className="suggestions" refs="suggestions">
+                            {/* <li> </li> */}
                         </ul>
                     </div>
                 </form>

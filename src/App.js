@@ -3,7 +3,13 @@ import './App.css';
 import Sticky from './StickyNav';
 import TabComp from './Tabs';
 import Search from './Search';
+import Landing from './Landing';
+import CoinSelection from './CoinSelection';
+import Summary from './SummaryCard';
+import Main from './Main';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
   constructor() {
@@ -36,7 +42,7 @@ class App extends Component {
   }
 
   toggle(id) {
-    
+
     let copy = Array.from(this.state.status);
     if (!copy.includes(id)) {
       copy.push(id)
@@ -68,20 +74,73 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <Sticky />
-        <div className="container">
-          <Search
-            longSummary = {this.state.summary} />
-        </div>
-        <TabComp
+
+    const LandingPage = (props) => {
+      return (
+        <Landing
           summary={this.state.summary}
           coinAdded={this.state.coins}
           status={this.state.status}
           toggle={this.toggle}
           addItemHandler={this.addItemHandler}
         />
+      )
+    }
+
+
+    const CoinSelectionInfo = (props) => {
+      return (
+        <div>
+          <CoinSelection
+            summary={this.state.summary}
+            coinAdded={this.state.coins}
+            status={this.state.status}
+            toggle={this.toggle}
+            addItemHandler={this.addItemHandler} />
+        </div>
+      )
+    }
+
+    const MainComp = (props) => {
+      return (
+        <div>
+          <Main
+            summary={this.state.summary}
+            coinAdded={this.state.coins}
+            status={this.state.status}
+            toggle={this.toggle}
+            addItemHandler={this.addItemHandler} />
+        </div>
+      )
+    }
+
+    const SummaryComp = (props) => {
+      return (
+        <div>
+          <Main
+            summary={this.state.summary}
+            coinAdded={this.state.coins}
+            status={this.state.status}
+            toggle={this.toggle}
+            addItemHandler={this.addItemHandler} />
+        </div>
+      )
+    }
+
+    return (
+
+      <div className="App">
+        <Sticky />
+        <div className="container">
+          <Router>
+            <div>
+              <Route path='/' exact render={(LandingPage)} />
+              <Route path='/CoinSelection' component={(CoinSelectionInfo)} />
+              <Route path='/Main' component={(MainComp)} />
+              <Route path='/Main' component={(SummaryComp)} />
+            </div>
+          </Router>
+        </div>
       </div>
     );
   }
