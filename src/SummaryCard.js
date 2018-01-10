@@ -88,7 +88,7 @@ class Summary extends React.Component {
         return (
             <div className="container">
                 <ul className="collection z-depth-2">
-                    {collectionsCrypto}
+                    {/* {collectionsCrypto} */}
                     {addedCoin}
                 </ul>
             </div>
