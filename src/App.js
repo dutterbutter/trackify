@@ -17,10 +17,13 @@ class App extends Component {
     this.state = {
       coins: [],
       summary: [],
-      status: []
+      status: [],
+
+      id: []
     }
     this.addItemHandler = this.addItemHandler.bind(this)
     this.toggle = this.toggle.bind(this)
+   
   }
 
   addItemHandler(id) {
@@ -34,6 +37,17 @@ class App extends Component {
 
         this.setState({
           coins: coinsTest
+        })
+
+    axios.post(`http://localhost:8080/summary/${id}`, {id})
+        .then(result => {
+          let newId = result.data
+          let copy2 = Array.from(this.state.id);
+          copy2.push(newId)
+
+          this.setState({
+            id : copy2
+          })
         })
       })
       .catch(error => {
@@ -87,7 +101,6 @@ class App extends Component {
       )
     }
 
-
     const CoinSelectionInfo = (props) => {
       return (
         <div>
@@ -109,7 +122,8 @@ class App extends Component {
             coinAdded={this.state.coins}
             status={this.state.status}
             toggle={this.toggle}
-            addItemHandler={this.addItemHandler} />
+            addItemHandler={this.addItemHandler} 
+            />
         </div>
       )
     }
