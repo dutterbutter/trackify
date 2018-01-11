@@ -151,5 +151,10 @@
 
 
 #walkThru {
-  color:#fff !important;
+  color:#fff;
+}
+
+.land{
+  margin: 5px;
+  width: 40%;
 }
