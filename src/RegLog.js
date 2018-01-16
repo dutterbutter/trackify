@@ -19,7 +19,7 @@ class RegLog extends React.Component {
                             <span id="walkThru">Sign-up</span>
                         </button>
                         <label>
-                            <input type="checkbox" checked="unchecked" />Remember Me
+                            <input type="checkbox" />Remember Me
                         </label>
                     </div>
                 </form>
