@@ -152,6 +152,7 @@ class App extends Component {
               <Route path='/CoinSelection' component={(CoinSelectionInfo)} />
               <Route path='/Main' component={(MainComp)} />
               {/* <Route path='/Main' component={(SummaryComp)} /> */}
+              
             </div>
           </Router>
         </div>
