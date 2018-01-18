@@ -12,7 +12,7 @@ class Landing extends React.Component {
                 <h4 className="align-center">A simple app designed to track
                     cryptocurrency prices
                 </h4>
-              <RegLog />
+              <RegLog signUp= { this.props.signUp } />
             </div>
 
         )

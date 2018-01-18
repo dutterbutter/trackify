@@ -22,8 +22,16 @@ class App extends Component {
       id: []
     }
     this.addItemHandler = this.addItemHandler.bind(this)
-    this.toggle = this.toggle.bind(this)
+    this.toggle         = this.toggle.bind(this)
+    this.signUp         = this.signUp.bind(this)
    
+  }
+
+  signUp(uname, pword) {
+    axios.post('http://localhost:8080/', {uname, pword})
+      .then(result => {
+        console.log("Youve signed up")
+      })
   }
 
   addItemHandler(id) {
@@ -97,6 +105,7 @@ class App extends Component {
           status={this.state.status}
           toggle={this.toggle}
           addItemHandler={this.addItemHandler}
+          signUp = { this.signUp }
         />
       )
     }

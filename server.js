@@ -3,28 +3,74 @@ const cors = require('cors');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const Coindb = require('./models/Coindb');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const exphbs = require('express-handlebars');
-const expressValidator = require('express-validator');
-const flash = require('connect-flash');
-const session = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-
+const PORT = process.env.PORT || 8080
+const bcrypt = require('bcrypt')
 
 app = express();
-PORT = process.env.PORT || 8080
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors());
-
+app.use(logger)
 
 const MONGO_CONNECTION_STRING = 'mongodb://localhost:27017/data/db'
 mongoose.connect(MONGO_CONNECTION_STRING);
 const connection = mongoose.connection;
+
+function logger(req, res, next) {
+    console.log('Request received: ', req.originalUrl);
+    next()
+}
+
+
+app.post('/', logger, (req, res) => {
+    const uname = req.body.uname;
+    const pword = req.body.pword;
+
+    bcrypt.genSalt(12, (err, salt) => {
+        if (err) {
+            res.status(500).json(err);
+        }
+        console.log('salt =', salt);
+
+        bcrypt.hash(pword, salt, (err, hashedPword) => {
+            if(err) {
+                return res.send(500);
+            }
+            Coindb({
+                uname: req.body.uname,
+                pword: hashedPword
+            }).save()
+                .then(saved => {
+                    res.send("You've Registered!");
+                })
+                .catch(err => {
+                    console.log(error);
+                    res.sendStatus(500).send("We have encountered an error")
+                })
+        })
+    })
+})
+
+app.post('/login'), (req, res) => {
+    const username   = req.body.uname,
+          pwordGuess = req.body.pword;
+    
+        Coindb.findOne(({uname: username}) => uname.username === username);
+                if(err) 
+                    throw err;       
+
+          bcrypt.compare(pwordGuess, (err, match) => {
+              if (err) {
+                  return res.send(500);
+              }
+              if (match) {
+                  return res.send(200, "Worked");
+              }else {
+                  return res.send(401);
+              }
+          });
+       
+}
 
 
 
