@@ -10,10 +10,10 @@ class RegLog extends React.Component {
         }
     }
 
-    handler(e) {
+    handler(evt) {
         this.setState ({
-            uname: e.target.value,
-            pword: e.target.value
+            uname: evt.target.value,
+            pword: evt.target.value
         })
     }
     handleSubmit(e) {
@@ -28,8 +28,8 @@ class RegLog extends React.Component {
                 <form onSubmit= {this.handleSubmit}>
                     <div className="container">
                     
-                        <input type='text' placeholder="Enter Username" name="username" onChange={this.handler} required />
-                        <input type="text" placeholder="Enter Password" name="password" onChange={this.handler} required />
+                        <input type='text' placeholder="Enter Username" name="username" value={ this.state.uname} onChange= {evt => this.handler(evt)} required />
+                        <input type="text" placeholder="Enter Password" name="password" value={ this.state.uname} onChange= {evt => this.handler(evt)} required />
 
                         <button className="waves-effect waves-light btn land">
                             <span id="walkThru">Login</span>
