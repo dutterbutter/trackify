@@ -39,7 +39,7 @@ class RegLog extends React.Component {
                         </button>
                         <div className="container">
                         <label>
-                            <input type="checkbox" />Remember Me
+                            <input type="checkbox" checked="checked" />Remember Me
                         </label>
                         </div>
                     </div>
