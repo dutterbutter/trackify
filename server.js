@@ -22,7 +22,7 @@ function logger(req, res, next) {
 }
 
 
-app.post('/', logger, (req, res) => {
+app.post('/signUp', logger, (req, res) => {
     const uname = req.body.uname;
     const pword = req.body.pword;
 
