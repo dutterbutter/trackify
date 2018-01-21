@@ -23,8 +23,8 @@ function logger(req, res, next) {
 
 
 app.post('/signUp', logger, (req, res) => {
-    const uname = req.body.uname;
-    const pword = req.body.pword;
+    const username = req.body.username;
+    const password = req.body.password;
 
     bcrypt.genSalt(12, (err, salt) => {
         if (err) {
@@ -32,13 +32,13 @@ app.post('/signUp', logger, (req, res) => {
         }
         console.log('salt =', salt);
 
-        bcrypt.hash(pword, salt, (err, hashedPword) => {
+        bcrypt.hash(password, salt, (err, hashedPword) => {
             if(err) {
                 return res.send(500);
             }
             Coindb({
-                uname: req.body.uname,
-                pword: hashedPword
+                username: req.body.username,
+                password: hashedPword
             }).save()
                 .then(saved => {
                     res.send("You've Registered!");
@@ -52,14 +52,14 @@ app.post('/signUp', logger, (req, res) => {
 })
 //this need work
 app.post('/login'), (req, res) => {
-    const username   = req.body.uname,
-          pwordGuess = req.body.pword;
+    const username   = req.body.username,
+          pwordGuess = req.body.password;
     
-        Coindb.findOne(({uname: username}) => uname.username === username);
+        let userAccount = Coindb.findOne((account) => account.username === username.username);
                 if(err) 
                     throw err;       
 
-          bcrypt.compare(pwordGuess, (err, match) => {
+          bcrypt.compare(pwordGuess, userAccount.password, (err, match) => {
               if (err) {
                   return res.send(500);
               }

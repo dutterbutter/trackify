@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const cryptoSchema = new Schema({
  
     coinId : {type: String},
-    uname  : {type: String},
-    pword  : {type: String}    
+    username  : {type: String},
+    password  : {type: String}    
   
 })
 
