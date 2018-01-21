@@ -50,7 +50,7 @@ app.post('/signUp', logger, (req, res) => {
         })
     })
 })
-
+//this need work
 app.post('/login'), (req, res) => {
     const username   = req.body.uname,
           pwordGuess = req.body.pword;
@@ -67,7 +67,7 @@ app.post('/login'), (req, res) => {
                   return res.send(200, "Worked");
               }else {
                   return res.send(401);
-              }
+              };
           });
        
 }
