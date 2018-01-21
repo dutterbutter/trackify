@@ -7,6 +7,7 @@ import Landing from './Landing';
 import CoinSelection from './CoinSelection';
 import Summary from './SummaryCard';
 import Main from './Main';
+import Login from './Login';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -161,7 +162,7 @@ class App extends Component {
               <Route path='/CoinSelection' component={(CoinSelectionInfo)} />
               <Route path='/Main' component={(MainComp)} />
               {/* <Route path='/Main' component={(SummaryComp)} /> */}
-              
+              <Route path= '/login' component = {(Login)} />
             </div>
           </Router>
         </div>

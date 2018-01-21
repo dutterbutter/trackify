@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 class RegLog extends React.Component {
     constructor() {
@@ -32,7 +32,8 @@ class RegLog extends React.Component {
                         <input type="text" placeholder="Enter Password" name="password" value={ this.state.uname} onChange= {evt => this.handler(evt)} required />
 
                         <button className="waves-effect waves-light btn land">
-                            <span id="walkThru">Login</span>
+                       
+                          <Link to= '/Login'> <span id="walkThru">Login</span></Link>
                         </button>
                         <button className="waves-effect waves-light btn land" type="submit">
                             <span id="walkThru">Sign-up</span>
