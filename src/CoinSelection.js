@@ -61,7 +61,7 @@ class CoinSelection extends React.Component {
 
         return (
             <div className="container">
-             <h4>Pick the coins you want to follow !!</h4>
+             <h4>Pick the coins you want to follow</h4>
                     <button className="walkThru waves-effect waves-light btn">
                         <Link to='/Main' id="walkThru">Done</Link>
                     </button>
