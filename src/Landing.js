@@ -9,8 +9,8 @@ class Landing extends React.Component {
         return (
             <div className="container">
                 <h1 className="align-center">Welcome to Trackify</h1>
-                <h4 className="align-center">A simple app designed to track
-                    cryptocurrency prices
+                <h4 className="align-center">A simple app designed to follow
+                    cryptocurrency prices 
                 </h4>
               <RegLog signUp= { this.props.signUp } />
             </div>
