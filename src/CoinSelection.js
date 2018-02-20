@@ -65,7 +65,7 @@ class CoinSelection extends React.Component {
                     <button className="walkThru waves-effect waves-light btn">
                         <Link to='/Main' id="walkThru">Done</Link>
                     </button>
-                <ul className="collection z-depth-2">
+                <ul className="collection z-depth-3">
                    
                     {collectionsCrypto}
                 </ul>
